@@ -1,0 +1,13 @@
+{
+  "prompt_bank": [
+    {"id":"gen_listing","role":"ecommerce_seo_writer","lang":"auto","target":"marketplace",
+     "prompt":"You are an expert e-commerce SEO copywriter for {marketplace}. Product: {product}. Seller note: {description}. Language: {lang}. Return JSON {title(80ch), description(rich bullets+emoji), tags[14]}."},
+    {"id":"gen_image_comfyui","role":"product_photographer_ai","prompt":"Photorealistic studio product shot of {product} on clean white background, softbox lighting, 8k, e-commerce marketplace style. Negative: blurry, hands, text."},
+    {"id":"seo_article","role":"seo_blogger","prompt":"Write 800-word SEO article in {lang} about selling {niche} on Etsy/Mercado Livre. H2 structure, actionable tips, 14 long-tail tags at end."},
+    {"id":"pinterest_pin","role":"pinterest_creator","prompt":"Create a Pinterest pin title + description for topic '{niche}'. Catchy, save-worthy, include emoji and link CTA."},
+    {"id":"cold_email","role":"outbound_sales","prompt":"Write a 60-word cold email to an Etsy/Mercado Livre seller offering LISTO AI to 10x their listing SEO. No spam, value-first."},
+    {"id":"support_reply","role":"support_agent","prompt":"Reply to customer in {lang}, friendly, concise. Question: {question}. If billing, give link to planos. If bug, log and reassure fix in 24h."},
+    {"id":"price_optimizer","role":"pricing_analyst","prompt":"Given MRR {mrr} and churn {churn}, suggest plan price adjustments to maximize LTV. Output JSON {pro,business,reason}."},
+    {"id":"ab_test","role":"growth_analyst","prompt":"Compare landing variant A vs B conversion. Recommend winner and next test. Output JSON {winner,confidence,next_test}."}
+  ]
+}

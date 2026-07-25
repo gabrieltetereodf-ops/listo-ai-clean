@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LISTO AI — Listagens perfeitas para Etsy, Mercado Livre, Amazon & Shopify</title>
+<meta name="description" content="Cole uma foto ou descreva seu produto. A IA gera título SEO, descrição que vende e 14 tags em segundos. Multi-marketplace, multi-idioma.">
+<style>
+  :root{
+    --bg:#070713; --glass:rgba(255,255,255,.06); --stroke:rgba(255,255,255,.12);
+    --accent:#7c5cff; --accent2:#19e3ff; --accent3:#ff5ca8; --txt:#eaeaff; --mut:#9aa0c7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);overflow-x:hidden;line-height:1.6}
+  canvas{position:fixed;inset:0;z-index:0;opacity:.55}
+  .wrap{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:0 22px}
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:26px;padding:90px 0}
+  .badge{display:inline-flex;gap:8px;align-items:center;padding:8px 16px;border:1px solid var(--stroke);background:var(--glass);border-radius:999px;font-size:13px;color:var(--mut);backdrop-filter:blur(10px)}
+  .badge b{color:var(--accent2);font-weight:600}
+  h1{font-size:clamp(38px,7vw,76px);line-height:1.05;font-weight:800;letter-spacing:-1.5px}
+  h1 .g{background:linear-gradient(100deg,var(--accent),var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 28px rgba(124,92,255,.45))}
+  .sub{font-size:clamp(16px,2.2vw,21px);color:var(--mut);max-width:640px}
+  .cta{display:inline-flex;gap:12px;align-items:center;padding:16px 34px;border-radius:14px;font-weight:700;font-size:17px;color:#fff;text-decoration:none;border:1px solid transparent;background:linear-gradient(100deg,var(--accent),var(--accent2));box-shadow:0 12px 40px rgba(124,92,255,.5);transition:.25s;cursor:pointer}
+  .cta:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 18px 60px rgba(25,227,255,.55)}
+  .marq{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+  .marq span{padding:7px 15px;border:1px solid var(--stroke);background:var(--glass);border-radius:10px;font-size:14px;color:var(--mut)}
+  section{padding:80px 0}
+  .grid{display:grid;gap:22px}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .card{background:var(--glass);border:1px solid var(--stroke);border-radius:18px;padding:26px;backdrop-filter:blur(14px);transition:.25s}
+  .card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 18px 50px rgba(124,92,255,.25)}
+  .card h3{font-size:19px;margin-bottom:8px}
+  .card p{color:var(--mut);font-size:15px}
+  .ic{font-size:30px;margin-bottom:12px;filter:drop-shadow(0 0 14px rgba(25,227,255,.5))}
+  h2{font-size:clamp(28px,4vw,44px);font-weight:800;text-align:center;margin-bottom:12px;letter-spacing:-1px}
+  .lead{text-align:center;color:var(--mut);max-width:620px;margin:0 auto 46px;font-size:17px}
+  .demo{background:var(--glass);border:1px solid var(--stroke);border-radius:22px;padding:30px;backdrop-filter:blur(14px)}
+  .demo label{display:block;font-size:13px;color:var(--mut);margin:14px 0 6px;text-transform:uppercase;letter-spacing:1px}
+  .row{display:flex;gap:14px;flex-wrap:wrap}
+  .demo input,.demo select,.demo textarea{width:100%;background:rgba(0,0,0,.35);border:1px solid var(--stroke);color:var(--txt);border-radius:12px;padding:13px 15px;font-size:15px;font-family:inherit}
+  .demo textarea{min-height:80px;resize:vertical}
+  .btn2{margin-top:18px;width:100%;padding:15px;border:none;border-radius:12px;font-weight:700;font-size:16px;color:#fff;background:linear-gradient(100deg,var(--accent),var(--accent2));cursor:pointer;transition:.2s}
+  .btn2:hover{filter:brightness(1.1)}
+  .btn2:disabled{opacity:.6;cursor:wait}
+  #result{margin-top:22px;display:none}
+  .res-box{background:rgba(0,0,0,.4);border:1px solid var(--stroke);border-radius:14px;padding:18px;margin-top:14px}
+  .res-box h4{color:var(--accent2);font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+  .res-box .ttl{font-size:18px;font-weight:700;margin-bottom:10px;color:#fff}
+  .res-box .body{white-space:pre-wrap;font-size:14px;color:var(--txt);max-height:280px;overflow:auto}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .tags span{background:rgba(124,92,255,.18);border:1px solid rgba(124,92,255,.4);color:var(--accent2);padding:5px 11px;border-radius:8px;font-size:13px}
+  .score{float:right;color:var(--accent3);font-weight:700}
+  .prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;margin-top:20px}
+  .plan{background:var(--glass);border:1px solid var(--stroke);border-radius:18px;padding:30px;text-align:center;backdrop-filter:blur(14px);position:relative}
+  .plan.pop{border-color:var(--accent);box-shadow:0 0 50px rgba(124,92,255,.3)}
+  .plan.pop::after{content:"MAIS POPULAR";position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(100deg,var(--accent),var(--accent2));padding:5px 14px;border-radius:999px;font-size:11px;font-weight:700}
+  .plan .p{font-size:40px;font-weight:800}
+  .plan .p small{font-size:15px;color:var(--mut);font-weight:500}
+  .plan ul{list-style:none;text-align:left;margin:18px 0;color:var(--mut);font-size:14px}
+  .plan ul li{padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+  .plan a{display:inline-block;padding:12px 26px;border-radius:11px;font-weight:700;text-decoration:none;color:#fff;background:rgba(255,255,255,.08);border:1px solid var(--stroke);transition:.2s}
+  .plan.pop a{background:linear-gradient(100deg,var(--accent),var(--accent2))}
+  .plan a:hover{filter:brightness(1.15)}
+  footer{padding:50px 0;text-align:center;color:var(--mut);font-size:14px;border-top:1px solid var(--stroke);margin-top:40px}
+  .stat{display:flex;gap:30px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+  .stat div{text-align:center}
+  .stat b{display:block;font-size:34px;font-weight:800;background:linear-gradient(100deg,var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat span{color:var(--mut);font-size:13px}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="wrap">
+  <div class="hero">
+    <div class="badge">🤖 IA 100% automatizada &nbsp;•&nbsp; <b>zero estoque</b> &nbsp;•&nbsp; <b>vende enquanto você dorme</b></div>
+
+  <div id="authbar" style="position:fixed;top:14px;right:18px;z-index:50;display:flex;gap:8px;align-items:center">
+    <button onclick="showAuth()" style="background:var(--glass);border:1px solid var(--stroke);color:var(--txt);padding:9px 16px;border-radius:10px;font-weight:600;cursor:pointer">Entrar / Criar</button>
+    <span id="userbadge" style="display:none;align-items:center;gap:8px;color:var(--txt);font-size:14px"></span>
+  </div>
+  <div id="authmodal" style="display:none;position:fixed;inset:0;z-index:60;background:rgba(5,5,15,.82);backdrop-filter:blur(6px);align-items:center;justify-content:center">
+    <div style="background:#0d0d22;border:1px solid var(--stroke);border-radius:18px;padding:30px;width:min(380px,92vw)">
+      <h3 style="margin-bottom:14px">Acesso LISTO AI</h3>
+      <input id="aemail" placeholder="seu@email.com" style="width:100%;margin-bottom:10px;padding:12px;border-radius:10px;background:rgba(0,0,0,.4);border:1px solid var(--stroke);color:#fff">
+      <input id="apw" type="password" placeholder="senha (4+)" style="width:100%;margin-bottom:14px;padding:12px;border-radius:10px;background:rgba(0,0,0,.4);border:1px solid var(--stroke);color:#fff">
+      <button onclick="doAuth('register')" style="width:100%;padding:12px;margin-bottom:8px;border:none;border-radius:10px;background:linear-gradient(100deg,var(--accent),var(--accent2));color:#fff;font-weight:700;cursor:pointer">Criar conta grátis</button>
+      <button onclick="doAuth('login')" style="width:100%;padding:12px;border:1px solid var(--stroke);border-radius:10px;background:transparent;color:var(--txt);cursor:pointer">Já tenho conta</button>
+      <button onclick="hideAuth()" style="width:100%;margin-top:8px;background:none;border:none;color:var(--mut);cursor:pointer">fechar</button>
+      <div id="amsg" style="margin-top:10px;color:var(--accent3);font-size:13px"></div>
+    </div>
+  </div>
+    <h1>Vire <span class="g">listagens que vendem</span><br>em 10 segundos</h1>
+    <p class="sub">Cole a foto ou descreva seu produto. A LISTO AI gera título otimizado por SEO, descrição persuasiva e 14 tags prontas para Etsy, Mercado Livre, Amazon e Shopify.</p>
+    <a class="cta" href="#demo">⚡ Testar grátis agora</a>
+    <div class="marq">
+      <span>🛍️ Etsy</span><span>🇧🇷 Mercado Livre</span><span>📦 Amazon</span><span>🛒 Shopify</span><span>🌎 PT / ES / EN</span>
+    </div>
+  </div>
+
+  <section id="demo">
+    <h2>Veja a mágica acontecer</h2>
+    <p class="lead">Sem cadastro. Sem cartão. Teste agora mesmo o gerador.</p>
+    <div class="demo">
+      <div class="row">
+        <div style="flex:1;min-width:200px">
+          <label>Produto</label>
+          <input id="product" placeholder="Ex: caneca personalizada gato">
+        </div>
+        <div style="flex:1;min-width:200px">
+          <label>Marketplace</label>
+          <select id="marketplace">
+            <option>Mercado Livre</option><option>Etsy</option><option>Amazon</option><option>Shopify</option>
+          </select>
+        </div>
+        <div style="flex:1;min-width:160px">
+          <label>Idioma</label>
+          <select id="lang"><option value="pt">Português</option><option value="en">English</option><option value="es">Español</option></select>
+        </div>
+      </div>
+      <label>Descrição (opcional)</label>
+      <textarea id="description" placeholder="Detalhes: material, uso, público...">caneca de ceramica feita a mao com estampa de gato fofo, ideal presente</textarea>
+      <button class="btn2" id="gen">🚀 Gerar listagem com IA</button>
+      <div id="result">
+        <div class="res-box">
+          <span class="score" id="score"></span>
+          <h4>Título SEO</h4>
+          <div class="ttl" id="r-title"></div>
+          <h4>Descrição</h4>
+          <div class="body" id="r-desc"></div>
+          <h4>Tags (14)</h4>
+          <div class="tags" id="r-tags"></div>
+          <h4>Motor</h4>
+          <div class="body" id="r-engine" style="font-size:13px;color:var(--mut)"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Por que LISTO AI</h2>
+    <p class="lead">Construída para rodar sozinha. Você só cola o resultado.</p>
+    <div class="grid g3">
+      <div class="card"><div class="ic">⚡</div><h3>Geração instantânea</h3><p>De foto/descrição a listagem pronta em segundos. Sem escrever nada.</p></div>
+      <div class="card"><div class="ic">🔍</div><h3>SEO que posiciona</h3><p>Títulos e tags com as palavras que compradores buscam em cada marketplace.</p></div>
+      <div class="card"><div class="ic">🌎</div><h3>Multi-idioma</h3><p>Venda no Brasil, EUA e América Latina sem tradutor. PT / ES / EN nativos.</p></div>
+      <div class="card"><div class="ic">🖼️</div><h3>Imagem por IA</h3><p>Em breve: gere a foto do produto com ComfyUI (sem fotógrafo, sem estúdio).</p></div>
+      <div class="card"><div class="ic">🔁</div><h3>Recorrente</h3><p>Assinatura mensal. Quanto mais produtos, mais você usa — e menos cancela.</p></div>
+      <div class="card"><div class="ic">🤖</div><h3>Automatizada</h3><p>Conteúdo, SEO, suporte e relatórios rodam por IA. Custo operacional ~zero.</p></div>
+    </div>
+  </section>
+
+  <section style="text-align:center">
+    <h2>Resultado em números</h2>
+    <div class="stat">
+      <div><b>+14</b><span>tags por listagem</span></div>
+      <div><b>10s</b><span>tempo de geração</span></div>
+      <div><b>4</b><span>marketplaces</span></div>
+      <div><b>3</b><span>idiomas</span></div>
+      <div><b>R$0</b><span>investimento inicial</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Planos</h2>
+    <p class="lead">Comece grátis. Evolua conforme vende.</p>
+    <div class="prices">
+      <div class="plan"><h3>Grátis</h3><div class="p">R$0</div><ul><li>5 listagens/mês</li><li>1 marketplace</li><li>Motor local IA</li></ul><a href="#demo" onclick="if(!TOKEN){showAuth();return true;}">Começar</a></div>
+      <div class="plan pop"><h3>Pro</h3><div class="p">R$49<small>/mês</small></div><ul><li>300 listagens/mês</li><li>Todos marketplaces</li><li>Multi-idioma</li><li>Score SEO avançado</li></ul><a href="#" onclick="upgrade('pro','mercadopago');return false;">Assinar (teste)</a></div>
+      <div class="plan"><h3>Business</h3><div class="p">R$149<small>/mês</small></div><ul><li>Ilimitado</li><li>API + bulk</li><li>Imagem por IA</li><li>White-label</li></ul><a href="#" onclick="upgrade('business','stripe');return false;">Assinar (teste)</a></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>LISTO AI — Empresa autônoma operada por IA. Receita recorrente, custo ~zero, escala global.</p>
+    <p style="margin-top:8px;opacity:.6">© 2026 LISTO AI · Feito para vender enquanto você dorme.</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="config.js"></script>
+<script>
+// ---- fundo 3D (particulas glow) ----
+const c=document.getElementById('bg');const r=()=>{c.width=innerWidth;c.height=innerHeight};
+r();addEventListener('resize',r);
+const sc=new THREE.Scene();const cam=new THREE.PerspectiveCamera(70,innerWidth/innerHeight,.1,1000);cam.position.z=400;
+const rnd=()=>new THREE.Vector3((Math.random()-.5)*900,(Math.random()-.5)*600,(Math.random()-.5)*500);
+const g=new THREE.Group();
+for(let i=0;i<260;i++){const m=new THREE.Mesh(new THREE.SphereGeometry(Math.random()*2.4+0.6,8,8),new THREE.MeshBasicMaterial({color:Math.random()>.5?0x7c5cff:0x19e3ff,transparent:true,opacity:.8}));m.position.copy(rnd());g.add(m);}
+sc.add(g);const ren=new THREE.WebGLRenderer({canvas:c,alpha:true});
+(function loop(){requestAnimationFrame(loop);g.rotation.y+=0.0009;g.rotation.x+=0.0004;ren.render(sc,cam);})();
+
+// ---- AUTH ----
+let TOKEN = localStorage.getItem('listo_token') || '';
+function showAuth(){document.getElementById('authmodal').style.display='flex';}
+function hideAuth(){document.getElementById('authmodal').style.display='none';}
+async function doAuth(mode){
+  const email=document.getElementById('aemail').value.trim();
+  const pw=document.getElementById('apw').value;
+  const msg=document.getElementById('amsg');
+  if(!email||pw.length<4){msg.textContent='Preencha email e senha (4+).';return;}
+  try{
+    const r=await fetch(LISTO_API+'/api/'+mode,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password:pw})});
+    const d=await r.json();
+    if(d.token){TOKEN=d.token;localStorage.setItem('listo_token',TOKEN);msg.style.color='#19e3ff';msg.textContent='✓ '+mode+' ok! Plano: '+d.plan;updateUser();setTimeout(hideAuth,900);}
+    else{msg.textContent='⚠ '+(d.error||'erro');}
+  }catch(e){msg.textContent='Erro: '+e;}
+}
+function authHeaders(){return TOKEN?{'Content-Type':'application/json','Authorization':'Bearer '+TOKEN}:{'Content-Type':'application/json'};}
+function updateUser(){
+  const b=document.getElementById('userbadge');
+  if(!TOKEN){b.style.display='none';document.querySelector('#authbar button').style.display='inline-block';return;}
+  fetch(LISTO_API+'/api/me',{headers:authHeaders()}).then(r=>r.json()).then(d=>{
+    if(d.email){b.style.display='flex';b.innerHTML='👤 '+d.email+' · <b>'+d.plan+'</b> <button onclick="logout()" style="background:var(--stroke);border:none;color:#fff;padding:5px 10px;border-radius:8px;cursor:pointer">sair</button>';
+      document.querySelector('#authbar button').style.display='none';}
+  }).catch(()=>{});
+}
+function logout(){TOKEN='';localStorage.removeItem('listo_token');updateUser();}
+updateUser();
+
+// ---- gerador ----
+const btn=document.getElementById('gen');const res=document.getElementById('result');
+btn.onclick=async()=>{
+  if(!TOKEN){showAuth();return;}
+  btn.disabled=true;btn.textContent='Gerando...';
+  const payload={product:product.value,description:description.value,marketplace:marketplace.value,lang:lang.value};
+  try{
+    const r=await fetch(LISTO_API+'/api/generate',{method:'POST',headers:authHeaders(),body:JSON.stringify(payload)});
+    const d=await r.json();
+    if(d.error && (r.status===401)){showAuth();return;}
+    if(d.error){document.getElementById('amsg')&&(document.getElementById('amsg').textContent=d.error);alert(d.error + (d.upgrade?' -> faça upgrade p/ '+d.upgrade:''));btn.disabled=false;btn.textContent='🚀 Gerar listagem com IA';return;}
+    document.getElementById('r-title').textContent=d.title;
+    document.getElementById('r-desc').textContent=d.description;
+    document.getElementById('r-engine').textContent=d.engine+' • '+d.ms+'ms • uso '+d.usage+(d.seo_score?' • SEO '+d.seo_score:'');
+    document.getElementById('score').textContent='SEO '+d.seo_score;
+    document.getElementById('r-tags').innerHTML=d.tags.map(t=>'<span>'+t+'</span>').join('');
+    res.style.display='block';
+  }catch(e){alert('Erro: '+e);}
+  btn.disabled=false;btn.textContent='🚀 Gerar listagem com IA';
+};
+
+// ---- upgrade ----
+async function upgrade(plan,method){
+  if(!TOKEN){showAuth();return;}
+  const r=await fetch(LISTO_API+'/api/checkout',{method:'POST',headers:authHeaders(),body:JSON.stringify({plan,method})});
+  const d=await r.json();
+  alert((d.status==='simulated_success'?'✓ Plano '+plan+' ativado (MODO TESTE, R$0 cobrado). ':'')+(d.note||d.error||''));
+  updateUser();
+}
+</script>
+</body>
+</html>
