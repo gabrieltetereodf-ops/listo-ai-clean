@@ -5,3 +5,9 @@ content/
 .env
 venv/
 *.egg-info/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
