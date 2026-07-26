@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="720" viewBox="0 0 1100 720" font-family="Segoe UI, system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070713"/><stop offset="1" stop-color="#0d0d22"/>
+    </linearGradient>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#19e3ff"/>
+    </linearGradient>
+    <linearGradient id="acc2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#19e3ff"/><stop offset="1" stop-color="#ff5ca8"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1100" height="720" fill="url(#bg)"/>
+  <text x="40" y="54" fill="#eaeaff" font-size="34" font-weight="800">LISTO AI — Dashboard Executivo</text>
+  <text x="40" y="82" fill="#9aa0c7" font-size="16">Empresa autônoma · custo R$0 · margem 99% · LTV/CAC 178x</text>
+
+  <!-- KPI cards -->
+  <g>
+    <rect x="40" y="110" width="245" height="120" rx="16" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)"/>
+    <text x="62" y="150" fill="#9aa0c7" font-size="13">ARPU</text>
+    <text x="62" y="190" fill="#19e3ff" font-size="36" font-weight="800" filter="url(#glow)">R$32</text>
+    <text x="62" y="214" fill="#9aa0c7" font-size="12">receita média / usuário / mês</text>
+  </g>
+  <g>
+    <rect x="305" y="110" width="245" height="120" rx="16" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)"/>
+    <text x="327" y="150" fill="#9aa0c7" font-size="13">LTV / CAC</text>
+    <text x="327" y="190" fill="#7c5cff" font-size="36" font-weight="800" filter="url(#glow)">178x</text>
+    <text x="327" y="214" fill="#9aa0c7" font-size="12">saudável &gt; 3x</text>
+  </g>
+  <g>
+    <rect x="570" y="110" width="245" height="120" rx="16" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)"/>
+    <text x="592" y="150" fill="#9aa0c7" font-size="13">Custo fixo</text>
+    <text x="592" y="190" fill="#ff5ca8" font-size="36" font-weight="800" filter="url(#glow)">R$2,50</text>
+    <text x="592" y="214" fill="#9aa0c7" font-size="12">/ mês (free tiers)</text>
+  </g>
+  <g>
+    <rect x="835" y="110" width="225" height="120" rx="16" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)"/>
+    <text x="857" y="150" fill="#9aa0c7" font-size="13">Automação</text>
+    <text x="857" y="190" fill="#19e3ff" font-size="36" font-weight="800" filter="url(#glow)">95%</text>
+    <text x="857" y="214" fill="#9aa0c7" font-size="12">tarefas por IA</text>
+  </g>
+
+  <!-- Trilha de MRR -->
+  <text x="40" y="290" fill="#eaeaff" font-size="20" font-weight="700">Trilha de Receita (MRR)</text>
+  <g>
+    <rect x="40" y="310" width="1020" height="60" rx="10" fill="rgba(255,255,255,.04)"/>
+    <rect x="50" y="328" width="120" height="24" rx="6" fill="url(#acc)"/>
+    <text x="110" y="345" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">R$1k</text>
+    <rect x="185" y="328" width="140" height="24" rx="6" fill="url(#acc)"/>
+    <text x="255" y="345" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">R$10k</text>
+    <rect x="340" y="328" width="170" height="24" rx="6" fill="url(#acc)"/>
+    <text x="425" y="345" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">R$50k</text>
+    <rect x="525" y="328" width="190" height="24" rx="6" fill="url(#acc)"/>
+    <text x="620" y="345" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">R$100k</text>
+    <rect x="730" y="328" width="210" height="24" rx="6" fill="url(#acc2)"/>
+    <text x="835" y="345" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">R$500k</text>
+    <rect x="955" y="328" width="97" height="24" rx="6" fill="url(#acc2)"/>
+    <text x="1003" y="345" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">R$1M</text>
+  </g>
+
+  <!-- Funil -->
+  <text x="40" y="410" fill="#eaeaff" font-size="20" font-weight="700">Funil Autônomo (vende enquanto dorme)</text>
+  <g font-size="13" fill="#eaeaff">
+    <rect x="40" y="428" width="1020" height="34" rx="8" fill="url(#acc)" opacity=".9"/>
+    <text x="60" y="450">1. Tráfego orgânico (SEO + Pinterest) — AGENTE DIÁRIO</text>
+    <rect x="120" y="470" width="860" height="34" rx="8" fill="url(#acc)" opacity=".8"/>
+    <text x="140" y="492">2. Visita landing → cria conta grátis (5 listagens/mês)</text>
+    <rect x="220" y="512" width="660" height="34" rx="8" fill="url(#acc2)" opacity=".85"/>
+    <text x="240" y="534">3. Converte p/ PRO R$49 / BUSINESS R$149 (checkout)</text>
+    <rect x="340" y="554" width="440" height="34" rx="8" fill="url(#acc2)" opacity=".7"/>
+    <text x="360" y="576">4. Uso recorrente → retenção por templates salvos</text>
+    <rect x="470" y="596" width="180" height="34" rx="8" fill="#19e3ff" opacity=".9"/>
+    <text x="490" y="618">5. MRR 🔁</text>
+  </g>
+
+  <!-- Pilares da autonomia -->
+  <text x="40" y="668" fill="#9aa0c7" font-size="13">IA faz: gerar listagem · escrever SEO · pins · suporte · A/B · imagem (ComfyUI) · relatórios · preços</text>
+  <text x="40" y="690" fill="#7c5cff" font-size="13" font-weight="700">Status: MVP ao vivo ✓ · auth ✓ · freemium ✓ · checkout(teste) ✓ · scheduler ✓ · pronto p/ deploy Cloudflare R$0</text>
+</svg>

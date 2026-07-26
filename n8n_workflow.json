@@ -1,0 +1,17 @@
+{
+  "name": "LISTO AI - Motor de Aquisicao Autonomo",
+  "nodes": [
+    {"id":"1","name":"Cron Diario 08:00","type":"n8n.nodes.cron","params":{"rule":{"interval":[{"field":"hours","triggerAtHour":8}]}}},
+    {"id":"2","name":"Selecionar Nicho","type":"n8n.nodes.function","params":{"code":"return [{niche: NICHE[new Date().getDate()%NICHE.length]}]"}},
+    {"id":"3","name":"Gerar Artigo SEO (LLM ou local)","type":"n8n.nodes.httpRequest","params":{"url":"http://localhost:8011/api/content","method":"POST"}},
+    {"id":"4","name":"Publicar no Blog (GitHub Pages)","type":"n8n.nodes.github","params":{"operation":"createFile","repo":"listoai/blog"}},
+    {"id":"5","name":"Criar 3 Pins Pinterest","type":"n8n.nodes.pinterest","params":{"count":3}},
+    {"id":"6","name":"Agendar Post Twitter/X","type":"n8n.nodes.twitter","params":{"text":"Novo guia SEO: {{niche}}"}},
+    {"id":"7","name":"Atualizar Dashboard KPI","type":"n8n.nodes.supabase","params":{"table":"metrics"}},
+    {"id":"8","name":"Email resumo p/ fundador","type":"n8n.nodes.emailSend","params":{"to":"founder@listoai.app","subject":"LISTO AI - conteudo do dia gerado"}}
+  ],
+  "connections": {
+    "1":["2"],"2":["3"],"3":["4","5","6"],"4":["7"],"5":["7"],"6":["7"],"7":["8"]
+  },
+  "notes": "Sem intervencao humana. Roda 365 dias/ano. Custo: R$0 (free tiers + local)."
+}

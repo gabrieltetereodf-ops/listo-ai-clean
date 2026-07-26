@@ -1,0 +1,35 @@
+{
+  "arpu": 32.05,
+  "cac": 4.0,
+  "ltv": 712.2222222222222,
+  "ltv_cac": 178.05555555555554,
+  "payback_meses": 0.12480499219968799,
+  "custo_fixo": 2.5,
+  "margem": 0.99,
+  "metas": {
+    "1000": {
+      "usuarios_pagos": 31,
+      "arr": 12000
+    },
+    "10000": {
+      "usuarios_pagos": 312,
+      "arr": 120000
+    },
+    "50000": {
+      "usuarios_pagos": 1560,
+      "arr": 600000
+    },
+    "100000": {
+      "usuarios_pagos": 3120,
+      "arr": 1200000
+    },
+    "500000": {
+      "usuarios_pagos": 15601,
+      "arr": 6000000
+    },
+    "1000000": {
+      "usuarios_pagos": 31201,
+      "arr": 12000000
+    }
+  }
+}
